@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { PinInput, PinInputGroup, PinInputSlot } from '@/components/ui/pin-input';
+import { Button } from '@/Components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/Components/ui/dialog';
+import { PinInput, PinInputGroup, PinInputSlot } from '@/Components/ui/pin-input';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { confirm } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
@@ -94,15 +94,15 @@ watch(
     <Dialog :open="isOpen" @update:open="isOpen = $event">
         <DialogContent class="sm:max-w-md">
             <DialogHeader class="flex items-center justify-center">
-                <div class="mb-3 w-auto rounded-full border border-border bg-card p-0.5 shadow-sm">
-                    <div class="relative overflow-hidden rounded-full border border-border bg-muted p-2.5">
+                <div class="border-border bg-card mb-3 w-auto rounded-full border p-0.5 shadow-sm">
+                    <div class="border-border bg-muted relative overflow-hidden rounded-full border p-2.5">
                         <div class="absolute inset-0 grid grid-cols-5 opacity-50">
-                            <div v-for="i in 5" :key="`col-${i}`" class="border-r border-border last:border-r-0" />
+                            <div v-for="i in 5" :key="`col-${i}`" class="border-border border-r last:border-r-0" />
                         </div>
                         <div class="absolute inset-0 grid grid-rows-5 opacity-50">
-                            <div v-for="i in 5" :key="`row-${i}`" class="border-b border-border last:border-b-0" />
+                            <div v-for="i in 5" :key="`row-${i}`" class="border-border border-b last:border-b-0" />
                         </div>
-                        <ScanLine class="relative z-20 size-6 text-foreground" />
+                        <ScanLine class="text-foreground relative z-20 size-6" />
                     </div>
                 </div>
                 <DialogTitle>{{ modalConfig.title }}</DialogTitle>
@@ -114,10 +114,10 @@ watch(
             <div class="relative flex w-auto flex-col items-center justify-center space-y-5">
                 <template v-if="!showVerificationStep">
                     <div class="relative mx-auto flex max-w-md items-center overflow-hidden">
-                        <div class="relative mx-auto aspect-square w-64 overflow-hidden rounded-lg border border-border">
+                        <div class="border-border relative mx-auto aspect-square w-64 overflow-hidden rounded-lg border">
                             <div
                                 v-if="!qrCodeSvg"
-                                class="absolute inset-0 z-10 flex aspect-square h-auto w-full animate-pulse items-center justify-center bg-background"
+                                class="bg-background absolute inset-0 z-10 flex aspect-square h-auto w-full animate-pulse items-center justify-center"
                             >
                                 <Loader2 class="size-6 animate-spin" />
                             </div>
@@ -134,18 +134,18 @@ watch(
                     </div>
 
                     <div class="relative flex w-full items-center justify-center">
-                        <div class="absolute inset-0 top-1/2 h-px w-full bg-border" />
-                        <span class="relative bg-card px-2 py-1">or, enter the code manually</span>
+                        <div class="bg-border absolute inset-0 top-1/2 h-px w-full" />
+                        <span class="bg-card relative px-2 py-1">or, enter the code manually</span>
                     </div>
 
                     <div class="flex w-full items-center justify-center space-x-2">
-                        <div class="flex w-full items-stretch overflow-hidden rounded-xl border border-border">
-                            <div v-if="!manualSetupKey" class="flex h-full w-full items-center justify-center bg-muted p-3">
+                        <div class="border-border flex w-full items-stretch overflow-hidden rounded-xl border">
+                            <div v-if="!manualSetupKey" class="bg-muted flex h-full w-full items-center justify-center p-3">
                                 <Loader2 class="size-4 animate-spin" />
                             </div>
                             <template v-else>
-                                <input type="text" readonly :value="manualSetupKey" class="h-full w-full bg-background p-3 text-foreground" />
-                                <button @click="copy(manualSetupKey || '')" class="relative block h-auto border-l border-border px-3 hover:bg-muted">
+                                <input type="text" readonly :value="manualSetupKey" class="bg-background text-foreground h-full w-full p-3" />
+                                <button @click="copy(manualSetupKey || '')" class="border-border hover:bg-muted relative block h-auto border-l px-3">
                                     <Check v-if="copied" class="w-4 text-green-500" />
                                     <Copy v-else class="w-4" />
                                 </button>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/Components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { regenerateRecoveryCodes } from '@/routes/two-factor';
 import { Form } from '@inertiajs/vue3';
@@ -59,15 +59,15 @@ onMounted(async () => {
             </div>
             <div :class="['relative overflow-hidden transition-all duration-300', isRecoveryCodesVisible ? 'h-auto opacity-100' : 'h-0 opacity-0']">
                 <div class="mt-3 space-y-3">
-                    <div ref="recoveryCodeSectionRef" class="grid gap-1 rounded-lg bg-muted p-4 font-mono text-sm">
+                    <div ref="recoveryCodeSectionRef" class="bg-muted grid gap-1 rounded-lg p-4 font-mono text-sm">
                         <div v-if="!recoveryCodesList.length" class="space-y-2">
-                            <div v-for="n in 8" :key="n" class="h-4 animate-pulse rounded bg-muted-foreground/20"></div>
+                            <div v-for="n in 8" :key="n" class="bg-muted-foreground/20 h-4 animate-pulse rounded"></div>
                         </div>
                         <div v-else v-for="(code, index) in recoveryCodesList" :key="index">
                             {{ code }}
                         </div>
                     </div>
-                    <p class="text-xs text-muted-foreground select-none">
+                    <p class="text-muted-foreground text-xs select-none">
                         Each recovery code can be used once to access your account and will be removed after use. If you need more, click
                         <span class="font-bold">Regenerate Codes</span> above.
                     </p>
