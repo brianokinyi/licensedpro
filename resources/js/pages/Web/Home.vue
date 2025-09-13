@@ -1,6 +1,6 @@
 <script setup>
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
-import ButtonLink from '@/Components/Links/ButtonLink.vue';
+import ButtonLink from '@/Components/Links/PrimaryButtonLink.vue';
 import WebLayout from '@/Layouts/WebLayout.vue';
 import { Link } from '@inertiajs/vue3';
 import { ArrowRight } from 'lucide-vue-next';

@@ -1,7 +1,10 @@
 <script setup>
-import ButtonLink from '@/Components/Links/ButtonLink.vue';
+import SimpleFlatBadge from '@/Components/Badges/SimpleFlatBadge.vue';
+import { default as ButtonLink, default as PrimaryButtonLink } from '@/Components/Links/PrimaryButtonLink.vue';
+import SecondaryButtonLink from '@/Components/Links/SecondaryButtonLink.vue';
 import WebLayout from '@/Layouts/WebLayout.vue';
-import { Lightbulb } from 'lucide-vue-next';
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
+import { Calendar, ChevronDown, ChevronUp, Clock, Lightbulb, MapPin } from 'lucide-vue-next';
 
 const pages = [
     { name: 'Home', href: '#', current: false },
@@ -15,10 +18,18 @@ const props = defineProps({
         required: true,
     },
 });
+
+const locations = [
+    { name: 'Middlesbrough', href: '#' },
+    { name: 'Stockton', href: '#' },
+    { name: 'Darlington', href: '#' },
+    { name: 'Hartlepool', href: '#' },
+    { name: 'Yarm', href: '#' },
+];
 </script>
 
 <template>
-    <WebLayout :title="course.name">
+    <WebLayout title="Door Supervisor Training">
         <section aria-labelledby="sale-heading">
             <div class="overflow-hidden">
                 <div class="bg-gray-950">
@@ -104,7 +115,72 @@ const props = defineProps({
         </section>
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h1>Course</h1>
+            <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm">
+                <div class="px-4 py-3 sm:px-3">
+                    <h2 class="text-lg font-medium text-gray-900">Course Dates</h2>
+                </div>
+                <div class="px-2 py-4 sm:p-3">
+                    <dl class="divide-y divide-gray-900/10">
+                        <Disclosure as="div" class="rounded-lg border border-gray-200 px-4 py-3" v-slot="{ open }">
+                            <dt>
+                                <DisclosureButton class="flex w-full items-start justify-between text-left text-gray-900">
+                                    <div class="flex items-center gap-2">
+                                        <MapPin class="size-5" />
+                                        <span class="text-base/7 font-semibold">Middlesbrough</span>
+                                        <span class="text-xs text-gray-600">Unit 35 - Romsey Industrial Estate, Hampshire, SO51 0HR</span>
+                                    </div>
+                                    <span class="ml-6 flex h-7 items-center">
+                                        <SimpleFlatBadge>3 dates</SimpleFlatBadge>
+                                        <ChevronDown v-if="!open" class="size-6" aria-hidden="true" />
+                                        <ChevronUp v-else class="size-6" aria-hidden="true" />
+                                    </span>
+                                </DisclosureButton>
+                            </dt>
+                            <DisclosurePanel as="dd" class="mt-6 grid grid-cols-3 gap-x-4 gap-y-6">
+                                <div
+                                    v-for="tier in 5"
+                                    :key="tier"
+                                    class="flex flex-col justify-between rounded-lg bg-white p-4 shadow-sm outline-1 outline-gray-900/10 sm:p-6"
+                                >
+                                    <div>
+                                        <h3 :id="tier.id" class="text-sm text-gray-600">Starting from</h3>
+                                        <div class="mt-4 flex items-baseline gap-x-2">
+                                            <span class="text-3xl font-semibold tracking-tight text-gray-900">449.99</span>
+                                            <span class="text-sm font-semibold text-gray-600">Incl. VAT</span>
+                                        </div>
+                                        <ul role="list" class="mt-10 space-y-2 text-sm/6 text-gray-600">
+                                            <li class="flex gap-x-3">
+                                                <Calendar class="h-6 w-5 flex-none text-gray-600" aria-hidden="true" />
+                                                Mon 29th Sep 2025 to Sat 4th Oct 2025
+                                            </li>
+                                            <li class="flex gap-x-3">
+                                                <Clock class="h-6 w-5 flex-none text-gray-600" aria-hidden="true" />
+                                                9am to 6pm
+                                            </li>
+                                            <li class="flex gap-x-3">
+                                                <Calendar class="h-6 w-5 flex-none text-gray-600" aria-hidden="true" />
+                                                6-day course
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <PrimaryButtonLink class="mt-4 justify-center">Book Now</PrimaryButtonLink>
+                                </div>
+                            </DisclosurePanel>
+                        </Disclosure>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mt-8 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm">
+                <div class="px-4 py-3 sm:px-3">
+                    <h2 class="text-lg font-medium text-gray-900">Locations</h2>
+                </div>
+                <div class="flex flex-wrap gap-2 px-2 py-4 sm:p-3">
+                    <SecondaryButtonLink v-for="location in locations" :key="location.name" :href="location.href" theme="default" size="base">{{
+                        location.name
+                    }}</SecondaryButtonLink>
+                </div>
+            </div>
         </div>
     </WebLayout>
 </template>

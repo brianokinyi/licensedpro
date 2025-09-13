@@ -6,7 +6,7 @@ const props = defineProps({
     theme: {
         type: String,
         required: false,
-        default: 'orange',
+        default: 'blue',
     },
     size: {
         type: String,
@@ -38,8 +38,8 @@ const theme = computed(() => {
 
 const size = computed(() => {
     return {
-        base: 'px-3 py-2 text-sm',
         sm: 'px-2 py-1 text-xs ',
+        base: 'px-3 py-2 text-sm',
         lg: 'px-4 py-3 text-base',
     }[props.size.toString()];
 });

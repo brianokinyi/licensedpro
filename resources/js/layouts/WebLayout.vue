@@ -14,7 +14,7 @@ defineProps({
 
         <WebHeader />
 
-        <main>
+        <main class="bg-gray-50">
             <slot />
         </main>
 
